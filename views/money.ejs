@@ -1,0 +1,40 @@
+<%- include("partials/header.ejs"); %>
+<link rel="stylesheet" href="/css/money.css">
+
+<div class="button-pos">
+    <a href="history">
+        <button type="button" class="btn">See All Transaction History</button>
+    </a>
+</div>
+
+<div class="main-table">
+    <table class="tbl">
+        <thead style="color: black;" class="table-head">
+            <tr>
+                <th class="text-center">S. No.</th>
+                <th class="text-center">FName</th>
+                <th class="text-center">LName</th>
+                <th class="text-center">E-Mail</th>
+                <th class="text-center">Gender</th>
+                <th class="text-center">Balance</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% users.forEach(function(user){ %>
+                <tr>
+                    <td class="text-centre-row"> <%= user.id %> </td>
+                    <td class="text-centre-row"> <%= user.fname %> </td>
+                    <td class="text-centre-row"> <%= user.lname %> </td>
+                    <td class="text-centre-row"> <%= user.email %> </td>
+                    <td class="text-centre-row"> <%= user.gender %> </td>
+                    <td class="text-centre-row"> <%= user.balance %> </td>
+                    <td><a href="transfer?id=<%= user.id %>"><button class="btn-outline-dark">View and Transact</button></a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+<!-- /users?id=   /transfer/  --> 
+<%- include("partials/footer.ejs"); %>

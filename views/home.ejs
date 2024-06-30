@@ -1,0 +1,42 @@
+<%- include("partials/header.ejs"); -%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.Bank</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+
+<div class="flex-container-background">
+<div class="home">
+    <h1 class="home-h">Your Bank at Your Fingertips</h1>
+</div>
+
+<div class="flex-item1">
+
+<div class="flex-item-login">
+    <h2  >Welcome</h2>
+</div>
+
+<div class="flex-item">
+    <form method="get" action="/money">  <!-- action -->
+        <button type="submit" >Money Transfer</button>
+    </form>
+</div>
+<div class="flex-item">
+    <form method="get" action="/history">  <!-- action -->
+        <button type="submit"  >Transaction History</button>
+    </form>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>
+
+
+<%- include("partials/footer.ejs"); -%>

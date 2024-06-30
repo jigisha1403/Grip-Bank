@@ -1,0 +1,77 @@
+<%- include("partials/header.ejs"); %>
+<link rel="stylesheet" href="/css/transfercss.css">
+ 
+<div class="welcome">
+    <h2>Money Transfer</h2>
+</div>
+
+<div class="btn-position">
+    <a href="history"> <button type="button" class="btn">See all Transaction History</button> </a>
+</div>
+<br>
+<div class="main-table">
+    <h2 class="text">Customer Details</h2>
+    <br>
+    <form method="post" class="tabletext"  action="/transfer"> <!-- action=/transfer?id=<%= user.id %> -->
+        <input type="hidden" name="from" value="<%= user.id %>">
+        <table class="tbl">
+            <thead style="color: black;" class="table-head">
+            <tr>
+                <th class="text-center">I.D.</th>
+                <th class="text-center">FName</th>
+                <th class="text-center">LName</th>
+                <th class="text-center">E-Mail</th>
+                <th class="text-center">Gender</th>
+                <th class="text-center">Balance</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            <tr>
+                <td class="text-centre-row"> <%= user.id %> </td>
+                <td class="text-centre-row"> <%= user.fname %> </td>
+                <td class="text-centre-row"> <%= user.lname %> </td>
+                <td class="text-centre-row"> <%= user.email %> </td>
+                <td class="text-centre-row"> <%= user.gender %> </td>
+                <td class="text-centre-row"> <%= user.balance %> </td>
+            </tr>
+        </tbody>    
+        </table>
+        <br>
+        <h2 class="text-2">Transfer Money Here!</h2>
+        <br>
+
+        <label class="main" style="font-size: 25px;">Transfer To:</label>
+        <br>
+        <select name="to" class="form-1" required>
+            <option value="disabled" selected style="width: 100%;">Choose</option>
+            <br>
+            <% users.forEach(function(user){ %>
+                <option class="table" value="<%= user.id %>">
+                    <%= user.fname %> <%= user.lname %>  (Balance:<%= user.balance %>)
+                </option>
+            <% }); %>
+
+            <br>
+            <br>
+            
+        </select>
+        <br>
+        <label class="main" style="font-size: 25px;">Amount:</label>
+        <br>
+        <input type="number" class="form-2" name="amount" required>
+
+            <br>
+            <br>
+
+            <div class="btn-position">
+                <button type="submit" class="btn" id="mybtn">Fill the Amount and Transfer</button>
+            </div>
+        
+    </form>
+</div>
+
+
+
+<%- include("partials/footer.ejs"); %>

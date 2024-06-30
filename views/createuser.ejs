@@ -1,0 +1,75 @@
+<%- include("partials/header.ejs"); %>
+<link rel="stylesheet" href="/css/createuser.css">
+
+<div class="main">
+    <h2>CREATE YOUR ACCOUNT</h2>
+
+    <div class="register">
+
+        <div class="form-field">
+            <form id="register" method="post">
+                <label>First Name: </label>
+                <br>
+                <input type="text" name="fname" id="name" placeholder="Enter your first name" />
+                <br>
+
+                <label>Last Name: </label>
+                <br>
+                <input type="text" name="lname" id="name" placeholder="Enter your last name" />
+                <br>
+
+                <label>E-mail: </label>
+                <br>
+                <input type="email" name="email" id="name" placeholder="Enter your valid e-mail" />
+                <br>
+                  
+                <label>Gender: </label>
+                <br>
+                &nbsp;&nbsp;&nbsp;
+                <input type="radio" name="gender" id="male" value="Male">
+                &nbsp;
+                <span id="male">Male</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="gender" id="female" value="Female">
+                &nbsp;
+                <span id="female">Female</span>
+                <br>
+
+                <label>Total Balance: </label>
+                <br>
+                <input type="text" name="balance" id="name" placeholder="Enter your balance" />
+                <br><br>
+
+                <input type="submit" value="submit" name="submit" id="submit">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<%- include("partials/footer.ejs"); %>
+
+<% if(submit){ %>
+    <% const fname = body.fname; %>
+    <% const lname = body.lname; %>
+    <% const email = body.email; %>
+    <% const gender = body.gender; %>
+    <% const balance = body.balance; %>
+
+    <% const query = "INSERT INTO users(fname, lname, email, gender, balance) VALUES ($1, $2, $3, $4, $5)" %>
+    <% const values = [fname, lname, email, gender, balance] %>
+    <% client.query(query, values, (err, result) => { %>
+        <% if (err) { %>
+            <script>
+                alert('Error occurred while creating user');
+                //window.location.href='error_page'; // Redirect to an error page
+            </script>
+            <% } else{ %>
+                <script>
+                    alert('Hurray!, user created');
+                    //window.location.href='home';
+                </script>
+                <% } %>
+    <% }); %>
+<% } %>

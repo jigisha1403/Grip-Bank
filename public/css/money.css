@@ -1,0 +1,57 @@
+.button-pos{
+    background-color: #009879;
+    width: 30%;
+    margin-left: 380px;
+    margin-right: 100px;
+    border-radius: 10px;
+    box-shadow: #262826;
+    margin-top: 7px;
+}
+.btn{
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.btn :hover,
+.button-pos :hover{
+    color: #262826;
+}
+
+.tbl{
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.tbl thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+.tbl tbody{
+    width: 100%;
+    text-align: center;
+}
+.tbl th,
+.tbl td{
+    padding: 5px 7px;
+}
+.tbl tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+.tbl tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.tbl tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
+}
+
+.btn-outline-dark{
+    border-radius: 2px;
+}

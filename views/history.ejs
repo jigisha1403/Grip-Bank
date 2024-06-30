@@ -1,0 +1,52 @@
+<%- include("partials/header.ejs"); %>
+<link rel="stylesheet" href="/css/history.css">
+
+<div class="welcome">
+    <h2>Transaction History</h2>
+</div>
+
+<div class="button-pos">
+    <a href="transfer"> 
+        <button type="button" class="btn">Click Here to Transfer Money</button>
+    </a>
+</div>
+
+<div class="main-table">
+    <table class="tbl">
+        <thead style="color: black;" class="table-head">
+            <tr>
+                <th class="text-center">S. No.</th>
+                <th class="text-center">Sender</th>
+                <th class="text-center">Receiver</th>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Date and Time</th>
+            </tr>
+        </thead>
+
+       <!--  <tbody>
+            <% transactions.forEach(function(row){ %>
+                <tr>
+                    <td class="text-centre-row"> <%= row.sno %> </td>
+                    <td class="text-centre-row"> <%= row.sender %> </td>
+                    <td class="text-centre-row"> <%= row.receiver %> </td>
+                    <td class="text-centre-row"> <%= row.balance %> </td>
+                    <td class="text-centre-row"> <%= row.datetime %> </td>
+                </tr>
+            <% }); %>
+        </tbody> -->
+        <tbody>
+            <% transactions.forEach((transaction, index) => { %>
+                <tr>
+                    <td class="text-centre-row"><%= index + 1 %></td>
+                    <td class="text-centre-row"><%= transaction.sender_fname %> <%= transaction.sender_lname %></td>
+                    <td class="text-centre-row"><%= transaction.receiver_fname %> <%= transaction.receiver_lname %></td>
+                    <td class="text-centre-row"><%= transaction.amount %></td>
+                    <td class="text-centre-row"><%= transaction.datetime %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table> 
+</div>
+
+
+<%- include("partials/footer.ejs"); %>

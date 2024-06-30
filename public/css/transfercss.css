@@ -1,0 +1,114 @@
+.welcome{
+    size: 20px;
+    color: #262826;
+    text-align: center;
+    font-weight: bold;
+}
+.btn-position{
+    background-color: #009879;
+    width: 30%;
+    margin-left: 400px;
+    margin-right: 110px;
+    border-radius: 10px;
+    box-shadow: #262826;
+}
+.btn{
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.btn :hover,
+.button-pos :hover{
+    color: #262826;
+}
+.text{
+    size: 20px;
+    color: #262826;
+    text-align: center;
+    font-weight: bold;
+}
+
+.tbl{
+    border-collapse: collapse;
+    margin: 7px 0;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.tbl thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+.tbl tbody{
+    width: 100%;
+    text-align: center;
+}
+.tbl th,
+.tbl td{
+    padding: 5px 7px;
+}
+.tbl tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+.tbl tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.tbl tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
+}
+
+.text-2{
+    size: 20px;
+    color: #262826;
+    text-align: center;
+    font-weight: bold;
+}
+.main{
+    size: 20px;
+    color: #262826;
+    font-weight: bold;
+}
+/* .form-1{
+    size: 20px;
+    padding: 6px;
+    margin-left: 0px;
+    width: 100%; 
+    border-radius: round;
+    margin-bottom: 30px;
+    background-color: rgb(214, 214, 210);
+    width: 300px; 
+    padding: 8px; 
+    font-size: 14px;
+}
+.last {
+    width: 100%; /* Make input field width 100% 
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+} */
+.form-1, .form-2 {
+    width: calc(100% - 20px); /* Adjust as needed */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: round;
+    background-color: rgb(214, 214, 210);
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Ensures padding is included in width calculation */
+}
+
+.form-1 {
+    width: 100%;
+    border-color: #262826;
+    border-width: 2px;
+}
+
+.form-2 {
+    width: 100%;
+    
+}

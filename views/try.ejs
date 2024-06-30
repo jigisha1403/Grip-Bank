@@ -1,0 +1,121 @@
+<tbody>
+    <% users.forEach(function(user){ %>
+        <tr>
+            <td class="text-centre-row"> <%= user.id %> </td>
+            <td class="text-centre-row"> <%= user.fname %> </td>
+            <td class="text-centre-row"> <%= user.lname %> </td>
+            <td class="text-centre-row"> <%= user.email %> </td>
+            <td class="text-centre-row"> <%= user.gender %> </td>
+            <td class="text-centre-row"> <%= user.balance %> </td>
+            <td><a href="/users?id=<%= user.id %>"><button class="btn-outline-dark">View and Transact</button></a></td>
+        </tr>
+    <% }); %>
+</tbody>
+
+async function fetchUsers() {
+    try {
+      const result = await db.query("SELECT * FROM users");
+      return result.rows;
+    } catch (error) {
+      throw new Error('Error fetching users: ' + error.message);
+    }
+  }
+  
+  // GET money page
+  app.get("/money", async (req, res) => {
+    try {
+      const users = await fetchUsers();
+      res.render("money", { users: users });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+
+
+
+  app.post("/transfer",function(req, res){
+    const from = req.query.id;
+    const to = req.query.to;
+    const amount = req.body.amount;
+
+    const querySender = "SELECT * FROM users WHERE id=$1";
+    const queryReceiver = "SELECT * FROM users WHERE id=$1";
+    const updateSenderBalance = "UPDATE users SET BALANCE = BALANCE - $1 WHERE id = $2";
+    const updateReceiverBalance = "UPDATE users SET BALANCE = BALANCE + $1 WHERE id = $2";
+    const insertTransaction = "INSERT INTO transaction (sender_id, receiver_id, amount) VALUES ($1, $2, $3)";
+
+    db.query(querySender, [from], (err,senderResult)=>{
+        if(err){
+            console.error('Error fetching sender details:', err);
+            return res.status(500).send('Internal server error')
+        }
+
+        const sender = senderResult.rows[0];
+
+        if(!sender){
+            return res.status(404).send('Sender not found');
+        }
+
+        if(sender.balance < amount){
+            return res.status(400).send('Insufficient balance');
+        }
+
+        db.query(queryReceiver, [to],( err, receiverResult)=>{
+            if(err){
+                console.error('Error fetching receivers details: ',err);
+                return res.status(500).send('Internal server error');
+            }
+            const receiver = receiverResult.rows[0];
+            if(!receiver){
+                res.status(404).send('Receiver not found');
+            }
+
+            db.query("BEGIN", (err)=>{
+                if(err){
+                    console.error('Error fetching transactions: ', err);
+                    return res.status(500).send('Internal server error');
+                }
+
+                db.query(updateSenderBalance, [amount, from], (err)=>{
+                    if(err){
+                        console.error('Erroe updating senders balance ',err);
+                        return db.query('ROLLBACK', ()=>{
+                            res.status(500).send('Internal server error');
+                        });
+                    }
+
+                    db.query(updateReceiverBalance, [amount, to], (err)=>{
+                        if(err){
+                            console.error('Erroe updating receiver balance ',err);
+                            return db.query('ROLLBACK', ()=>{
+                                res.status(500).send('Internal server error');
+                            });
+                        }
+
+                        db.query(insertTransaction, [from, to, amount], (err)=>{
+                            if(err){
+                                console.error('Error inserting transaction: ',err);
+                                return db.query('ROLLBACK', ()=>{
+                                res.status(500).send('Internal server error');
+                                });
+                           }
+
+                           db.query('COMMIT', (err) => {
+                            if (err) {
+                                console.error('Error committing transaction:', err);
+                                return res.status(500).send('Internal Server Error');
+                            }
+
+                            res.redirect('/history'); 
+                        });
+                            
+                        });
+                    });
+
+                });
+            });
+        });
+    });
+});
